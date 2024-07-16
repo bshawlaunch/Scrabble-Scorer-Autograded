@@ -12,7 +12,7 @@ const oldPointStructure = {
   10: ['Q', 'Z']
 };
 
-function oldScrabbleScorer(word) {
+function oldScrabbleScorer(word='LaunchCode') {
 	word = word.toUpperCase();
 	let letterPoints = "";
     let score = 0;
@@ -41,7 +41,7 @@ function initialPrompt() {
 
 let newPointStructure = transform(oldPointStructure);
 
-let simpleScorer = function (word) {
+let simpleScorer = function (word = 'LaunchCode') {
     word = word.toUpperCase();
     let letterPoints = "";
     let score = 0;
@@ -54,7 +54,7 @@ let simpleScorer = function (word) {
 
 };
 
-let vowelBonusScorer = function (word) {
+let vowelBonusScorer = function (word = 'LaunchCode') {
     vowels = ["A", "E", "I", "O", "U"];
     word = word.toUpperCase();
     let letterPoints = "";
@@ -72,13 +72,13 @@ let vowelBonusScorer = function (word) {
 };
 
 let scrabbleScorer = function(word) {
-    let score = 0;
-  
+let score = 0;
+let scoreObject = {}
     for (let i = 0; i < word.length; i++) {
-      score += newPointStructure[word[i].toLowerCase()];
+        score += newPointStructure[word[i].toLowerCase()];
     }
-  
-    return score;
+    return score
+
   };
 
 
@@ -98,18 +98,21 @@ function scorerPrompt(word) {
 
 function transform(oldPointStructure) {
     let newPointStructure = {};
-    
+    let letter = "";
     for (let pointValue in oldPointStructure) {
       for (let i = 0; i < oldPointStructure[pointValue].length; i++) {
-        let letter = oldPointStructure[pointValue][i].toString();
-        newPointStructure[letter.toLowerCase()] = Number(pointValue);
-        newPointStructure[letter.toUpperCase()] = Number(pointValue);
+        letter = String(oldPointStructure[pointValue][i]);
+        // upperCase = String(letter).toUpperCase();
+        lowerCase = String(letter).toLowerCase();
+        newPointStructure[lowerCase] = Number(pointValue);
+        // newPointStructure[upperCase] = Number(pointValue);
       }
     }
-    
+    console.log(newPointStructure)    
     return newPointStructure;
 }
-console.log(transform(oldPointStructure));
+// console.log(transform(oldPointStructure));
+
 
 function runProgram() {
     userInput = initialPrompt();
