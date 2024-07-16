@@ -108,7 +108,7 @@ function transform(oldPointStructure) {
         // newPointStructure[upperCase] = Number(pointValue);
       }
     }
-    console.log(newPointStructure)    
+ 
     return newPointStructure;
 }
 // console.log(transform(oldPointStructure));
